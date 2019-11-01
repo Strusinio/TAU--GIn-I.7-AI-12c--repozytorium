@@ -52,14 +52,20 @@ public class FootballClubManagerTest {
     @Test
     public void UpdateClub() {
         footballClubManager.create(footballClub);
-        FootballClub newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(6).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
+        FootballClub newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
         footballClubManager.update(newClub);
         assertEquals("Real Madryt", footballClubManager.read(1).getName());
+        assertEquals("80000", footballClubManager.read(1).getStadiumCapacity());
+        assertEquals("Madrid", footballClubManager.read(1).getLocation());
+
     }
     @Test (expected = NullPointerException.class)
     public void UpdateNonExistentTvShow () {
         footballClubManager.update(footballClub);
     }
+
+
+
 
 
 }
