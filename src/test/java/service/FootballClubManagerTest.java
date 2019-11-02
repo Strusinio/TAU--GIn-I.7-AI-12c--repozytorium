@@ -66,14 +66,7 @@ public class FootballClubManagerTest {
         // use mock in test....
         assertEquals(footballClubManager.getCreationDate(), localDateTime);
     }
-    @Test
-    public void testDoubleTime(){
-        mock(FootballClubDates.class);
-        when(footballClubDates.getUpdateDate()).thenReturn(localDateTime);
-        assertEquals(60,new FootballClubDates().getUpdateDate());
-    }
-
-
+ 
     @Test
     public void UpdateClub() {
         footballClubManager.create(footballClubDates);
