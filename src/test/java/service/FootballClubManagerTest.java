@@ -1,17 +1,22 @@
 package service;
 
-import domain.FootballClub;
 import domain.FootballClubBuilder;
 import domain.FootballClubDates;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class FootballClubManagerTest {
 
     private FootballClubManager footballClubManager;
     private FootballClubDates footballClubDates;
+    private LocalDateTime localDateTime;
+
 
     @Before
     public void setUp() {
@@ -51,6 +56,25 @@ public class FootballClubManagerTest {
         footballClubManager.read(footballClubDates.getId());
     }
     @Test
+    public void test1()  {
+        //  create mock
+        FootballClubDates footballClubManager = mock(FootballClubDates.class);
+
+        // define return value for method getUniqueId()
+        when(footballClubManager.getCreationDate()).thenReturn(localDateTime);
+
+        // use mock in test....
+        assertEquals(footballClubManager.getCreationDate(), localDateTime);
+    }
+    @Test
+    public void testDoubleTime(){
+        mock(FootballClubDates.class);
+        when(footballClubDates.getUpdateDate()).thenReturn(localDateTime);
+        assertEquals(60,new FootballClubDates().getUpdateDate());
+    }
+
+
+    @Test
     public void UpdateClub() {
         footballClubManager.create(footballClubDates);
         FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
@@ -61,7 +85,7 @@ public class FootballClubManagerTest {
 
     }
     @Test (expected = NullPointerException.class)
-    public void UpdateNonExistentTvShow () {
+    public void UpdateNonExistentFootballClub () {
         footballClubManager.update(footballClubDates);
     }
 
