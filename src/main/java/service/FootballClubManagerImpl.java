@@ -1,6 +1,7 @@
 package service;
 
-import domain.FootballClub;
+
+import domain.FootballClubDates;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,10 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class FootballClubManagerImpl implements FootballClubManager{
-    private Map<Integer, FootballClub> footballClubMap = new HashMap<>();
+    private Map<Integer, FootballClubDates> footballClubMap = new HashMap<>();
 
     @Override
-    public void create(FootballClub footballClub) {
+    public void create(FootballClubDates footballClub) {
         if(footballClubMap.containsKey(footballClub.getId())) {
             throw new IllegalArgumentException("Football Club ID: " + footballClub.getId() + " already exists.");
         } else {
@@ -21,7 +22,7 @@ public class FootballClubManagerImpl implements FootballClubManager{
     }
 
     @Override
-    public FootballClub read(Integer id) {
+    public FootballClubDates read(Integer id) {
         if (footballClubMap.containsKey(id)) {
             return footballClubMap.get(id);
         } else {
@@ -30,7 +31,7 @@ public class FootballClubManagerImpl implements FootballClubManager{
     }
 
     @Override
-    public void update(FootballClub footballClub) {
+    public void update(FootballClubDates footballClub) {
         if (footballClubMap.containsKey(footballClub.getId())) {
             footballClubMap.replace(footballClub.getId(), footballClub);
         } else {
@@ -40,12 +41,12 @@ public class FootballClubManagerImpl implements FootballClubManager{
     }
 
     @Override
-    public void delete(FootballClub footballClub) {
+    public void delete(FootballClubDates footballClub) {
         footballClubMap.remove(footballClub.getId());
     }
 
     @Override
-    public List<FootballClub> listAllSeries() {
+    public List<FootballClubDates> listAllSeries() {
         return new ArrayList<>(footballClubMap.values());
     }
 }

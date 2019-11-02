@@ -2,6 +2,7 @@ package service;
 
 import domain.FootballClub;
 import domain.FootballClubBuilder;
+import domain.FootballClubDates;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,25 +11,25 @@ import static org.junit.Assert.assertEquals;
 public class FootballClubManagerTest {
 
     private FootballClubManager footballClubManager;
-    private FootballClub footballClub;
+    private FootballClubDates footballClubDates;
 
     @Before
     public void setUp() {
         footballClubManager = new FootballClubManagerImpl();
 
-        footballClub = new FootballClubBuilder().byId(1).byName("FC Barcelona").byStadiumCapacity(4).byLocation("Barcelona").byGround("Camp Nou").byLeague("La Liga").build();
+        footballClubDates = new FootballClubBuilder().byId(1).byName("FC Barcelona").byStadiumCapacity(4).byLocation("Barcelona").byGround("Camp Nou").byLeague("La Liga").build();
     }
     @Test
     public void CreateNewFootballClub() {
-        footballClubManager.create(footballClub);
+        footballClubManager.create(footballClubDates);
 
         assertEquals(1, footballClubManager.listAllSeries().size());
     }
     @Test (expected = IllegalArgumentException.class)
     public void ShowWithIdAlreadyExists() {
-        FootballClub newClub = new FootballClubBuilder().byId(1).build();
+        FootballClubDates newClub = new FootballClubBuilder().byId(1).build();
 
-        footballClubManager.create(footballClub);
+        footballClubManager.create(footballClubDates);
         footballClubManager.create(newClub);
     }
     @Test (expected = NullPointerException.class)
@@ -38,21 +39,21 @@ public class FootballClubManagerTest {
 
     @Test
     public void ReadFootbalClub() {
-        footballClubManager.create(footballClub);
-        FootballClub createdClub = footballClubManager.read(1);
+        footballClubManager.create(footballClubDates);
+        FootballClubDates createdClub = footballClubManager.read(1);
 
-        assertEquals(footballClub, createdClub);
+        assertEquals(footballClubDates, createdClub);
     }
     @Test (expected = NullPointerException.class)
     public void DeleteClub() {
-        footballClubManager.create(footballClub);
-        footballClubManager.delete(footballClub);
-        footballClubManager.read(footballClub.getId());
+        footballClubManager.create(footballClubDates);
+        footballClubManager.delete(footballClubDates);
+        footballClubManager.read(footballClubDates.getId());
     }
     @Test
     public void UpdateClub() {
-        footballClubManager.create(footballClub);
-        FootballClub newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
+        footballClubManager.create(footballClubDates);
+        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
         footballClubManager.update(newClub);
         assertEquals("Real Madryt", footballClubManager.read(1).getName());
         assertEquals(80000, footballClubManager.read(1).getStadiumCapacity());
@@ -61,7 +62,7 @@ public class FootballClubManagerTest {
     }
     @Test (expected = NullPointerException.class)
     public void UpdateNonExistentTvShow () {
-        footballClubManager.update(footballClub);
+        footballClubManager.update(footballClubDates);
     }
 
 

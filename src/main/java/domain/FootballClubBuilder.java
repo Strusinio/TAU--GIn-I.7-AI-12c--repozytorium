@@ -32,14 +32,14 @@ public class FootballClubBuilder {
         this.league = league;
         return this;
     }
-    public FootballClub build() {
-        FootballClub footballClub= new FootballClub();
-        footballClub.setId(id);
-        footballClub.setName(name);
-        footballClub.setStadiumCapacity(stadiumCapacity);
-        footballClub.setLocation(location);
-        footballClub.setGround(ground);
-        footballClub.setLeague(league);
-        return footballClub;
+    public FootballClubDates build() {
+        FootballClubDates footballClubDates = new FootballClubDates();
+        footballClubDates.setId(id);
+        footballClubDates.setName(name);
+        footballClubDates.setStadiumCapacity(stadiumCapacity);
+        footballClubDates.setLocation(location);
+        footballClubDates.setGround(ground);
+        footballClubDates.setLeague(league);
+        return footballClubDates;
     }
 }
