@@ -2,6 +2,7 @@ package service;
 import domain.FootballClubDates;
 import java.util.List;
 
+
 public interface FootballClubManager {
     void create(FootballClubDates footballClubDates);
     FootballClubDates read(Integer id);

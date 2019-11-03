@@ -11,9 +11,9 @@ public class FootballClubDates extends FootballClub{
         return creationDate;
     }
 
-    //public void setCreationDate(String creationDate) {
-    //    this.creationDate = creationDate;
-    //}
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public LocalDateTime getUpdateDate() {
         return updateDate;
@@ -31,12 +31,4 @@ public class FootballClubDates extends FootballClub{
         this.lastAccessDate = lastAccessDate;
     }
 
-    public void getLastAccessDate(String never_called) {
-    }
-
-    public void getCreationDate(String called_at_least_once) {
-    }
-
-    public void getUpdateDate(String called_at_least_twice) {
-    }
 }
