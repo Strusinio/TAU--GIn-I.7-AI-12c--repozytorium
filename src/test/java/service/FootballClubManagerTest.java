@@ -127,7 +127,7 @@ public class FootballClubManagerTest {
     public void UpdatedClubHasUpdateDateIfEnabled() {
         footballClubManager.setUpdateDateEnabled(true);
         footballClubManager.create(footballClubDates);
-        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("FC Barcelona").byStadiumCapacity(4).byLocation("Barcelona").byGround("Camp Nou").byLeague("La Liga").build();
+        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
         footballClubManager.update(newClub);
         FootballClubDates createdClub = footballClubManager.read(1);
         assertNotNull(createdClub.getUpdateDate());
@@ -138,7 +138,7 @@ public class FootballClubManagerTest {
     public void UpdatedShowHasNoUpdateDateIfDisabled() {
         footballClubManager.setUpdateDateEnabled(false);
         footballClubManager.create(footballClubDates);
-        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("FC Barcelona").byStadiumCapacity(4).byLocation("Barcelona").byGround("Camp Nou").byLeague("La Liga").build();
+        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
         footballClubManager.update(newClub);
         FootballClubDates createdClub = footballClubManager.read(1);
         verify(dateService, atMost(2)).getCurrentTime();
