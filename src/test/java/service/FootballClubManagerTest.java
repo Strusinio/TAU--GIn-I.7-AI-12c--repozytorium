@@ -6,13 +6,12 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.verification.AtMost;
+
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class FootballClubManagerTest {
 
@@ -124,18 +123,7 @@ public class FootballClubManagerTest {
     }
 
     @Test
-    public void UpdatedClubHasUpdateDateIfEnabled() {
-        footballClubManager.setUpdateDateEnabled(true);
-        footballClubManager.create(footballClubDates);
-        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
-        footballClubManager.update(newClub);
-        FootballClubDates createdClub = footballClubManager.read(1);
-        assertNotNull(createdClub.getUpdateDate());
-        assertEquals(currentTime, createdClub.getUpdateDate());
-    }
-
-    @Test
-    public void UpdatedShowHasNoUpdateDateIfDisabled() {
+    public void UpdatedClubHasNoUpdateDateIfDisabled() {
         footballClubManager.setUpdateDateEnabled(false);
         footballClubManager.create(footballClubDates);
         FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();

@@ -1,12 +1,15 @@
 package domain;
 
 public class FootballClub {
+
+
     private int id;
     private String name;
     private int stadiumCapacity;
     private String location;
     private String ground;
     private String league;
+
 
     public int getId() {
         return id;
