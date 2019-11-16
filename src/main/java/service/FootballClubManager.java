@@ -9,4 +9,5 @@ public interface FootballClubManager {
     void update(FootballClubDates footballClubDates);
     void delete(FootballClubDates footballClubDates);
     List<FootballClubDates> listAllSeries();
+    List<FootballClubDates> findInLeague(String regex);
 }

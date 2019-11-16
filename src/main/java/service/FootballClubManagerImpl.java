@@ -60,6 +60,19 @@ public class FootballClubManagerImpl implements FootballClubManager {
     public List<FootballClubDates> listAllSeries() { return new ArrayList<>(footballClubMap.values());}
 
 
+    @Override
+    public List<FootballClubDates> findInLeague(String regex) {
+        if (regex == null) {
+            throw new IllegalArgumentException("Not working Correctly ");
+        }
+        List<FootballClubDates> result = new ArrayList<>();
+        footballClubMap.values().stream()
+                .filter(footballClubDates -> footballClubDates.getLeague().matches(regex))
+                .forEach(footballClubDates -> result.add(footballClubDates));
+        return result;
+    }
+
+
     public void setCreationTimeEnabled(boolean creationTimeEnabled){
        this.creationTimeEnabled = creationTimeEnabled;
     }
