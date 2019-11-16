@@ -24,25 +24,26 @@ public class FootballClubAddGuide {
         footballClubManager = new FootballClubManagerImpl();
     }
 
-    @Given("Football Club ID {int} FootballClub Name {string}")
+
+    @Given("Football Club ID *int} FootballClub Name *string}")
     public void footballClubWithNameAdded (Integer id, String name) {
         footballClubBuilder = new FootballClubBuilder();
         footballClubBuilder.byId(id).byName(name);
     }
-    @Given("Football Club Stadium Capacity {int} }")
+    @Given("Football Club Stadium Capacity *int} }")
     public void footballClubStadiumCapacity (Integer stadiumCapacity){
         footballClubBuilder.byStadiumCapacity(stadiumCapacity);
     }
-    @Given("Football Club Location {string}")
+    @Given("Football Club Location *string}")
     public void footballClubLocation(String location) {
         footballClubBuilder.byLocation(location);
     }
 
-    @Given("Football Club Ground {string}")
+    @Given("Football Club Ground *string}")
     public void footballClubGround(String ground) {
         footballClubBuilder.byGround(ground);
     }
-    @Given("Football Club League {string}")
+    @Given("Football Club League *string}")
     public void footballClubLeague(String league) {
         footballClubBuilder.byLeague(league);
     }
@@ -53,7 +54,7 @@ public class FootballClubAddGuide {
         footballClubManager.create(addedFootballClub);
     }
 
-    @Then("Football Club will be added with id in base {int}")
+    @Then("Football Club will be added with id in base *int}")
     public void footballClubAddedCorrectly(Integer id){
         FootballClubDates footballClubCreated = footballClubManager.read(id);
         assertEquals(addedFootballClub.getId(), footballClubCreated.getId());
@@ -67,12 +68,12 @@ public class FootballClubAddGuide {
         footballClubManager.create(new FootballClubBuilder().byId(5).byName("Valencia CF").byStadiumCapacity(60000).byLocation("Valencia").byGround("Estadio Mestalla").byLeague("La Liga").build());
     }
 
-    @When("finding out how many leagues start with the word La{string}")
+    @When("finding out how many leagues start with the word La*string}")
     public void checkTvShowTitleForWords(String regex) {
         footballClubDatesList = footballClubManager.findInLeague(regex);
     }
 
-    @Then("I am counting it {int} which leagues contains La")
+    @Then("I am counting it *int} which leagues contains La")
     public void countWordAppearances (int number) {
         assertEquals(number, footballClubDatesList.size());
     }
