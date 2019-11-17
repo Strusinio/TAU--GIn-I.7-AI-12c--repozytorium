@@ -1,9 +1,9 @@
 package cucumber;
 
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import domain.FootballClubBuilder;
 import domain.FootballClubDates;
 import service.FootballClubManager;
@@ -30,7 +30,7 @@ public class FootballClubAddGuide {
         footballClubBuilder = new FootballClubBuilder();
         footballClubBuilder.byId(id).byName(name);
     }
-    @Given("with Football Club Stadium Capacity {int}")
+    @Given("Football Club Stadium Capacity {int}")
     public void footballClubStadiumCapacity (Integer stadiumCapacity){
         footballClubBuilder.byStadiumCapacity(stadiumCapacity);
     }
@@ -39,7 +39,7 @@ public class FootballClubAddGuide {
         footballClubBuilder.byLocation(location);
     }
 
-    @Given("Football Club Ground {string} ")
+    @Given("Football Club Ground {string}")
     public void footballClubGround(String ground) {
         footballClubBuilder.byGround(ground);
     }
@@ -54,7 +54,7 @@ public class FootballClubAddGuide {
         footballClubManager.create(addedFootballClub);
     }
 
-    @Then("Football Club will be added with id in base {int}")
+    @Then("it will exist with a given id {int} in the database")
     public void footballClubAddedCorrectly(Integer id){
         FootballClubDates footballClubCreated = footballClubManager.read(id);
         assertEquals(addedFootballClub.getId(), footballClubCreated.getId());
@@ -63,7 +63,7 @@ public class FootballClubAddGuide {
     public void addFootballClubToBase() {
         footballClubManager.create(new FootballClubBuilder().byId(1).byName("FC Barcelona").byStadiumCapacity(95000).byLocation("Barcelona").byGround("Camp Nou").byLeague("La Liga").build());
         footballClubManager.create(new FootballClubBuilder().byId(2).byName("Real Madrid").byStadiumCapacity(80000).byLocation("Madrid").byGround("Estadio Bernabeu").byLeague("La Liga").build());
-        footballClubManager.create(new FootballClubBuilder().byId(3).byName("Sevilla FC").byStadiumCapacity(50000).byLocation("Sevilla").byGround("Estadio Ramon Sanchez Pizjuan").byLeague("La Liga").build());
+        footballClubManager.create(new FootballClubBuilder().byId(3).byName("Sevilla FC").byStadiumCapacity(50000).byLocation("Sevilla").byGround("Estadio Ramón Sánchez Pizjuán").byLeague("La Liga").build());
         footballClubManager.create(new FootballClubBuilder().byId(4).byName("Atletico Madrid").byStadiumCapacity(75000).byLocation("Madrid").byGround("Wanda Metropolitano").byLeague("La Liga").build());
         footballClubManager.create(new FootballClubBuilder().byId(5).byName("Valencia CF").byStadiumCapacity(60000).byLocation("Valencia").byGround("Estadio Mestalla").byLeague("La Liga").build());
     }
@@ -77,11 +77,4 @@ public class FootballClubAddGuide {
     public void countWordAppearances (int number) {
         assertEquals(number, footballClubDatesList.size());
     }
-
-
 }
-
-
-
-
-
