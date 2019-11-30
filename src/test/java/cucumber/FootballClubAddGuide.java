@@ -1,13 +1,13 @@
 package cucumber;
 
 
+import FC.domain.FootballClub;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import domain.FootballClubBuilder;
-import domain.FootballClubDates;
-import service.FootballClubManager;
-import service.FootballClubManagerImpl;
+import FC.domain.FootballClubBuilder;
+import FC.service.FootballClubManager;
+import FC.service.FootballClubManagerImpl;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import static org.junit.Assert.assertEquals;
 public class FootballClubAddGuide {
     private FootballClubManager footballClubManager;
     private FootballClubBuilder footballClubBuilder;
-    private List<FootballClubDates>footballClubDatesList;
-    private FootballClubDates addedFootballClub;
+    private List<FootballClub>footballClubList;
+    private FootballClub addedFootballClub;
 
     public FootballClubAddGuide(){
         footballClubBuilder = new FootballClubBuilder();
@@ -56,7 +56,7 @@ public class FootballClubAddGuide {
 
     @Then("it will exist with a given id {int} in the database")
     public void footballClubAddedCorrectly(Integer id){
-        FootballClubDates footballClubCreated = footballClubManager.read(id);
+        FootballClub footballClubCreated = footballClubManager.read(id);
         assertEquals(addedFootballClub.getId(), footballClubCreated.getId());
     }
     @Given("Football Clubs in base")
@@ -70,11 +70,11 @@ public class FootballClubAddGuide {
 
     @When("finding out how many leagues start with the word La{string}")
     public void checkTvShowTitleForWords(String regex) {
-        footballClubDatesList = footballClubManager.findInLeague(regex);
+        footballClubList = footballClubManager.findInLeague(regex);
     }
 
     @Then("I am counting it {int} which leagues contains La")
     public void countWordAppearances (int number) {
-        assertEquals(number, footballClubDatesList.size());
+        assertEquals(number, footballClubList.size());
     }
 }

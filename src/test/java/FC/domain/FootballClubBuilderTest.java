@@ -1,5 +1,7 @@
-package domain;
+package FC.domain;
 
+import FC.domain.FootballClub;
+import FC.domain.FootballClubBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

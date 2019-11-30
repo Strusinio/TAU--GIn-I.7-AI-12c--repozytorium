@@ -1,4 +1,4 @@
-package domain;
+package FC.domain;
 
 public class FootballClubBuilder {
     private int id;
@@ -32,14 +32,14 @@ public class FootballClubBuilder {
         this.league = league;
         return this;
     }
-    public FootballClubDates build() {
-        FootballClubDates footballClubDates = new FootballClubDates();
-        footballClubDates.setId(id);
-        footballClubDates.setName(name);
-        footballClubDates.setStadiumCapacity(stadiumCapacity);
-        footballClubDates.setLocation(location);
-        footballClubDates.setGround(ground);
-        footballClubDates.setLeague(league);
-        return footballClubDates;
+    public FootballClub build() {
+        FootballClub FootballClub = new FootballClub();
+        FootballClub.setId(id);
+        FootballClub.setName(name);
+        FootballClub.setStadiumCapacity(stadiumCapacity);
+        FootballClub.setLocation(location);
+        FootballClub.setGround(ground);
+        FootballClub.setLeague(league);
+        return FootballClub;
     }
 }

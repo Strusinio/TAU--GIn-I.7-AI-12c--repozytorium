@@ -1,6 +1,9 @@
-package service;
+package FC.service;
 
-import domain.*;
+import FC.domain.FootballClub;
+import FC.domain.FootballClubBuilder;
+import FC.service.DateService;
+import FC.service.FootballClubManagerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -21,14 +24,14 @@ public class FootballClubManagerTest {
 
     @InjectMocks
     private FootballClubManagerImpl footballClubManager;
-    private FootballClubDates footballClubDates;
+    private FootballClub footballClub;
     private LocalDateTime currentTime;
 
     @Before
     public void setUp() {
         footballClubManager = new FootballClubManagerImpl();
 
-        footballClubDates = new FootballClubBuilder().byId(1).byId(1).byName("FC Barcelona").byStadiumCapacity(4).byLocation("Barcelona").byGround("Camp Nou").byLeague("La Liga").build();
+        footballClub = new FootballClubBuilder().byId(1).byId(1).byName("FC Barcelona").byStadiumCapacity(4).byLocation("Barcelona").byGround("Camp Nou").byLeague("La Liga").build();
 
         currentTime = LocalDateTime.now();
 
@@ -39,16 +42,16 @@ public class FootballClubManagerTest {
 
     @Test
     public void CreateNewFootballClub() {
-        footballClubManager.create(footballClubDates);
+        footballClubManager.create(footballClub);
 
         assertEquals(1, footballClubManager.listAllSeries().size());
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void ClubIdAlreadyExists() {
-        FootballClubDates newClub = new FootballClubBuilder().byId(1).build();
+        FootballClub newClub = new FootballClubBuilder().byId(1).build();
 
-        footballClubManager.create(footballClubDates);
+        footballClubManager.create(footballClub);
         footballClubManager.create(newClub);
     }
 
@@ -59,23 +62,23 @@ public class FootballClubManagerTest {
 
     @Test
     public void ReadFootbalClub() {
-        footballClubManager.create(footballClubDates);
-        FootballClubDates createdClub = footballClubManager.read(1);
+        footballClubManager.create(footballClub);
+        FootballClub createdClub = footballClubManager.read(1);
 
-        assertEquals(footballClubDates, createdClub);
+        assertEquals(footballClub, createdClub);
     }
 
     @Test (expected = NullPointerException.class)
     public void DeleteClub() {
-        footballClubManager.create(footballClubDates);
-        footballClubManager.delete(footballClubDates);
-        footballClubManager.read(footballClubDates.getId());
+        footballClubManager.create(footballClub);
+        footballClubManager.delete(footballClub);
+        footballClubManager.read(footballClub.getId());
     }
 
     @Test
     public void UpdateClub() {
-        footballClubManager.create(footballClubDates);
-        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
+        footballClubManager.create(footballClub);
+        FootballClub newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
         footballClubManager.update(newClub);
         assertEquals("Real Madryt", footballClubManager.read(1).getName());
         assertEquals(80000, footballClubManager.read(1).getStadiumCapacity());
@@ -84,24 +87,24 @@ public class FootballClubManagerTest {
 
     @Test (expected = NullPointerException.class)
     public void UpdateNonExistentFootbalClub () {
-        footballClubManager.update(footballClubDates);
+        footballClubManager.update(footballClub);
     }
 
     @Test
     public void ReadingClubChangesLastAccessDateIfEnabled() {
         footballClubManager.setLastAccessDateEnabled(true);
-        footballClubManager.create(footballClubDates);
+        footballClubManager.create(footballClub);
         footballClubManager.read(1);
-        assertNotNull(footballClubDates.getLastAccessDate());
-        assertEquals(currentTime, footballClubDates.getLastAccessDate());
+        assertNotNull(footballClub.getLastAccessDate());
+        assertEquals(currentTime, footballClub.getLastAccessDate());
     }
 
     @Test
     public void ReadingClubDoesNotChangeLastAccessDateIfDisabled() {
         footballClubManager.setCreationTimeEnabled(false);
         footballClubManager.setLastAccessDateEnabled(false);
-        footballClubManager.create(footballClubDates);
-        FootballClubDates createdClub = footballClubManager.read(1);
+        footballClubManager.create(footballClub);
+        FootballClub createdClub = footballClubManager.read(1);
         verify(dateService,never()).getCurrentTime();
         assertNull(createdClub.getLastAccessDate());
     }
@@ -109,16 +112,16 @@ public class FootballClubManagerTest {
     @Test
     public void CreatedClubHasCreationDateIfEnabled() {
         footballClubManager.setCreationTimeEnabled(true);
-        footballClubManager.create(footballClubDates);
-        assertNotNull(footballClubDates.getCreationDate());
-        assertEquals(currentTime, footballClubDates.getCreationDate());
+        footballClubManager.create(footballClub);
+        assertNotNull(footballClub.getCreationDate());
+        assertEquals(currentTime, footballClub.getCreationDate());
     }
 
     @Test
     public void CreatedClubHasNoCreationDateIfDisabled() {
         footballClubManager.setCreationTimeEnabled(false);
-        footballClubManager.create(footballClubDates);
-        FootballClubDates createdClub = footballClubManager.read(1);
+        footballClubManager.create(footballClub);
+        FootballClub createdClub = footballClubManager.read(1);
         verify(dateService, only()).getCurrentTime();
         assertNull(createdClub.getCreationDate());
     }
@@ -126,10 +129,10 @@ public class FootballClubManagerTest {
     @Test
     public void UpdatedClubHasNoUpdateDateIfDisabled() {
         footballClubManager.setUpdateDateEnabled(false);
-        footballClubManager.create(footballClubDates);
-        FootballClubDates newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
+        footballClubManager.create(footballClub);
+        FootballClub newClub = new FootballClubBuilder().byId(1).byName("Real Madryt").byStadiumCapacity(80000).byLocation("Madrid").byGround("Bernabeu").byLeague("La Liga").build();
         footballClubManager.update(newClub);
-        FootballClubDates createdClub = footballClubManager.read(1);
+        FootballClub createdClub = footballClubManager.read(1);
         verify(dateService, atMost(2)).getCurrentTime();
         assertNull(createdClub.getUpdateDate());
     }

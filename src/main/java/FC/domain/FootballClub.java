@@ -1,4 +1,6 @@
-package domain;
+package FC.domain;
+
+import java.time.LocalDateTime;
 
 public class FootballClub {
 
@@ -9,6 +11,9 @@ public class FootballClub {
     private String location;
     private String ground;
     private String league;
+    private LocalDateTime creationDate;
+    private LocalDateTime updateDate;
+    private LocalDateTime lastAccessDate;
 
 
     public int getId() {
@@ -59,6 +64,29 @@ public class FootballClub {
         this.league = league;
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public LocalDateTime getLastAccessDate() {
+        return lastAccessDate;
+    }
+
+    public void setLastAccessDate(LocalDateTime lastAccessDate) {
+        this.lastAccessDate = lastAccessDate;
+    }
 
 
 
