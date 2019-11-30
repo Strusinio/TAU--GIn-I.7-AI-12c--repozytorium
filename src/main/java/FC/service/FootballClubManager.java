@@ -2,7 +2,9 @@ package FC.service;
 
 import FC.domain.FootballClub;
 
+
 import java.util.List;
+
 
 
 public interface FootballClubManager {

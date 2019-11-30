@@ -15,17 +15,17 @@ public class FootballClubController {
     public FootballClubController(FootballClubManager footballClubManager) {
         this.footballClubManager = footballClubManager;
 
-        FootballClub newClub = new FootballClubBuilder()
+        FootballClub newClub= new FootballClubBuilder()
                 .byId(1).byName("FC Barcelona")
-                .byStadiumCapacity(98000)
-                .byLocation("Barcelona")
+                .byStadiumCapacity(6)
+                .byLocation("Location")
                 .byGround("Camp Nou")
                 .byLeague("La Liga")
                 .build();
 
         FootballClub newClub2 = new FootballClubBuilder()
                 .byId(2).byName("Real Madrid")
-                .byStadiumCapacity(80000)
+                .byStadiumCapacity(4)
                 .byLocation("Madrid")
                 .byGround("Bernabeu")
                 .byLeague("La Liga")
@@ -36,17 +36,18 @@ public class FootballClubController {
     }
 
     @GetMapping("")
-    public List<FootballClub> getAllFootballClubs() {
+    public List<FootballClub> getAllClub() {
         return footballClubManager.listAllSeries();
     }
 
     @GetMapping("/{id}")
-    public FootballClub getFootballClub(@PathVariable Integer id) {
+    public FootballClub getFootballClubw(@PathVariable Integer id) {
         return footballClubManager.read(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFootballClub(@PathVariable Integer id) { footballClubManager.delete(footballClubManager.read(id));
+    public void deleteClub(@PathVariable Integer id) {
+        footballClubManager.delete(footballClubManager.read(id));
     }
 
 }

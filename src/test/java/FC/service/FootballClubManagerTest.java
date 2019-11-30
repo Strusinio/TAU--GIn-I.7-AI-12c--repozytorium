@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
+import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+@Service
 public class FootballClubManagerTest {
 
     @Mock
