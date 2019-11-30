@@ -39,7 +39,7 @@ public class FootballClubControllerTest {
 
     @Test
     public void ReturnCorrectFootballClubWhenExist() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/tvshows/1")
+        mvc.perform(MockMvcRequestBuilders.get("/footballclubs/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
