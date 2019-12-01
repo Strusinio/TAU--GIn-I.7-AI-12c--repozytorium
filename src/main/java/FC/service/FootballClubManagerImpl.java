@@ -1,7 +1,6 @@
 package FC.service;
 
 import FC.domain.FootballClub;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

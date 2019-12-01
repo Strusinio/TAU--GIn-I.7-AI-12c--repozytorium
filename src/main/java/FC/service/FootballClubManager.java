@@ -1,8 +1,6 @@
 package FC.service;
 
 import FC.domain.FootballClub;
-import org.springframework.context.annotation.Bean;
-
 
 import java.util.List;
 

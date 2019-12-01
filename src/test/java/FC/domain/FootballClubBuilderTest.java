@@ -1,12 +1,9 @@
 package FC.domain;
 
-import FC.domain.FootballClub;
-import FC.domain.FootballClubBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotNull;
