@@ -69,7 +69,7 @@ public class FootballClubAddGuide {
     }
 
     @When("finding out how many leagues start with the word La{string}")
-    public void checkTvShowTitleForWords(String regex) {
+    public void checkTitleForWords(String regex) {
         footballClubList = footballClubManager.findInLeague(regex);
     }
 

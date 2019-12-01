@@ -51,7 +51,7 @@ public class FootballClubBuilderTest {
         assertEquals(4, footballClub.getStadiumCapacity());
     }
     @Test
-    public void TvShowHasLocation() {
+    public void FootballClubHasLocation() {
         FootballClub footballClub;
 
         footballClub = footballClubBuilder.byLocation("Barcelona").build();
@@ -59,7 +59,7 @@ public class FootballClubBuilderTest {
         assertEquals("Barcelona", footballClub.getLocation());
     }
     @Test
-    public void TvShowHasGround() {
+    public void FootballClubHasGround() {
         FootballClub footballClub;
 
         footballClub = footballClubBuilder.byGround("Camp Nou").build();
@@ -67,7 +67,7 @@ public class FootballClubBuilderTest {
         assertEquals("Camp Nou", footballClub.getGround());
     }
     @Test
-    public void TvShowHasGLeague() {
+    public void FootballClubHasGLeague() {
         FootballClub footballClub;
 
         footballClub = footballClubBuilder.byLeague("La Liga").build();
