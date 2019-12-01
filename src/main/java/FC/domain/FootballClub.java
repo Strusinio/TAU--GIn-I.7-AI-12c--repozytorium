@@ -1,5 +1,7 @@
 package FC.domain;
 
+
+
 import java.time.LocalDateTime;
 
 public class FootballClub {

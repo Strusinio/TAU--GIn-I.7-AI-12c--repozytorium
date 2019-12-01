@@ -1,6 +1,7 @@
 package FC.service;
 
 import FC.domain.FootballClub;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@Service
+@Component
 public class FootballClubManagerImpl implements FootballClubManager {
     private Map<Integer, FootballClub> footballClubMap = new HashMap<>();
     private DateService dateService = new DateServiceImpl();
@@ -45,14 +46,16 @@ public class FootballClubManagerImpl implements FootballClubManager {
 
     @Override
     public void update(FootballClub footballClub) {
-        if (footballClubMap.containsKey(footballClub.getId())) {
+        if (footballClubMap.containsKey(footballClub.getId()) && updateDateEnabled) {
+            footballClub.setUpdateDate(dateService.getCurrentTime());
+            footballClubMap.replace(footballClub.getId(), footballClub);
+        } else if (footballClubMap.containsKey(footballClub.getId()) && !updateDateEnabled) {
             footballClubMap.replace(footballClub.getId(), footballClub);
         } else {
-            throw new NullPointerException("Football Club ID: " + footballClub + " doesn't exist.");
+            throw new NullPointerException("footbal Club: " + footballClub + " doesn't exist.");
         }
 
     }
-
     @Override
     public void delete(FootballClub footballClub) {
         footballClubMap.remove(footballClub.getId());
@@ -70,7 +73,7 @@ public class FootballClubManagerImpl implements FootballClubManager {
         List<FootballClub> result = new ArrayList<>();
         footballClubMap.values().stream()
                 .filter(footballClub -> footballClub.getLeague().matches(regex))
-                .forEach(footballClub -> result.add(footballClub));
+                .forEach(result::add);
         return result;
     }
 
