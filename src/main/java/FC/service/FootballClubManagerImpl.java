@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@Component
+@Service
 public class FootballClubManagerImpl implements FootballClubManager {
     private Map<Integer, FootballClub> footballClubMap = new HashMap<>();
     private DateService dateService = new DateServiceImpl();
